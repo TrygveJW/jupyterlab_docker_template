@@ -1,0 +1,14 @@
+{
+ "argv": [
+  "/home/jupyter/project/.py_env/bin/python3",
+  "-m",
+  "ipykernel_launcher",
+  "-f",
+  "{connection_file}"
+ ],
+ "display_name": "viretual_env",
+ "language": "python",
+ "metadata": {
+  "debugger": true
+ }
+}
