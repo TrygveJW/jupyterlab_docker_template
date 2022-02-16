@@ -1,5 +1,5 @@
-#FROM ubuntu
-FROM  nvidia/cuda:11.3.1-cudnn8-runtime-ubuntu20.04
+FROM ubuntu
+#FROM  nvidia/cuda:11.3.1-cudnn8-runtime-ubuntu20.04
 
 RUN apt update && apt upgrade -y
 RUN apt install -y python3-pip curl git 
@@ -17,6 +17,9 @@ ENV TZ=Europe/Oslo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 
+RUN python3 -m pip install ipywidgets
+RUN jupyter nbextension enable --py widgetsnbextension
+
 ARG user=jupyter
 ARG group=jupyter
 ARG uid=1000
@@ -24,9 +27,15 @@ ARG gid=1000
 RUN groupadd -g ${gid} ${group}
 RUN useradd -u ${uid} -g ${group} -s /bin/sh -m ${user}
 
+
+RUN apt install -y graphviz
+
 # RUN python3 -m ipykernel install --name=.py_env
 # Switch to user
 USER ${uid}:${gid}
+
+
+
 
 WORKDIR home/jupyter
 RUN mkdir  project
